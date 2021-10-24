@@ -5,11 +5,9 @@ let page
 let browser
 let litterArr = []
 class CatLitters {
-  // We will add 3 methods here
-  // Initializes and create puppeteer instance
   static async init() {
+    //TODO fix problem Cannot read properties of undefined (reading 'launch')
     browser = await puppeteer.launch({
-      // headless: false,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -29,7 +27,7 @@ class CatLitters {
       await page.waitForSelector('.productBox_product').catch(() => {}),
     ])
   }
-  // Visits the page, retrieves the job
+
   static async resolver() {
     await this.init()
     const catLitterUrls = await page.evaluate(() => {
@@ -60,7 +58,7 @@ class CatLitters {
     })
     return catLitterUrls
   }
-  // Converts the cat litters to array
+
   static async getCatLitters() {
     const catLitters = await this.resolver()
     await browser.close()
